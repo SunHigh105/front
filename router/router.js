@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import InputForm from '@/components/containers/searchForm.vue';
+import InputForm from '@/components/containers/SearchForm.vue';
 import DestinationMapping from '@/components/containers/DestinationList.vue';
 import ModelPlanList from '@/components/containers/ModelPlanList.vue';
 

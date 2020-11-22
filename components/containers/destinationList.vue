@@ -2,7 +2,7 @@
   <MappingPage :destination-list="destinationList" />
 </template>
 <script>
-import MappingPage from '@/components/presentationals/DestinationMappingPage.vue';
+import MappingPage from '@/components/presentationals/MappingPage.vue';
 export default {
   components: {
     MappingPage,
