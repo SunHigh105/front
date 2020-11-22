@@ -1,13 +1,25 @@
 import Vue from 'vue';
-import Example from '../components/Example.vue';
-import '../sass/style.scss';
+import router from '@/router/router.js';
+import store from '@/store/store.js';
+import MainComponent from '@/components/containers/MainContainer.vue';
+
+import '@/sass/app.scss';
+
+import * as VueGoogleMaps from 'vue2-google-maps';
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: MAP_API_KEY,
+    libraries: 'places', 
+  },
+});
 
 const app = new Vue({
-  el: "#app",
   components: {
-    Example,
+    MainComponent,
   },
-	data: {
-		message: 'Hello World'
-	}
+  el: "#app",
+  router,
+  store,
+  render: h => h(MainComponent)
 })

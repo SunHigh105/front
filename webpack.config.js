@@ -1,8 +1,11 @@
 const loader = require('sass-loader');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
 const MODE = "development";
 const enabledSourceMap = MODE === "development";
+
+require('dotenv').config();
 
 module.exports = {
   entry: './src/index.js',
@@ -14,14 +17,14 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        use: 'vue-loader',
       },
       {
-        test: /\.scss/,
+        test: /\.(sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               url: false,
               sourceMap: enabledSourceMap,
@@ -29,7 +32,7 @@ module.exports = {
             }
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sourceMap: enabledSourceMap,
             }
@@ -40,11 +43,15 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({ filename: 'css/style.css' })
+    new MiniCssExtractPlugin({ filename: 'css/style.css' }),
+    new webpack.DefinePlugin({
+      MAP_API_KEY: JSON.stringify(process.env.MAP_API_KEY),
+    })
   ],
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': `${__dirname}`
     }
   }
 }
