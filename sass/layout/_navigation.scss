@@ -4,10 +4,12 @@
 
   & > ul {
     list-style: none;
+    width: 100%;
+    display: table;
     border-bottom: 1px solid #ddd;
 
     & > li {
-      display: inline-block;
+      display: table-cell;
       padding: 0.5em;
       width: 33%;
       text-align: center;
