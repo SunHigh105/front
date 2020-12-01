@@ -10,8 +10,8 @@ require('dotenv').config();
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: `${__dirname}/dist`,
-    filename: 'main.js'
+    path: `${__dirname.replace('front', '')}/public`,
+    filename: 'app.js'
   },
   module: {
     rules: [

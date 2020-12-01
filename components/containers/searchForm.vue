@@ -3,13 +3,16 @@
     :count="count"
     @add-destination="addDestination"
     @delete-destination="deleteDestination"
+    @search-directions="searchDirections"
   />
 </template>
 <script>
 import { mapState } from 'vuex';
 import { mapMutations } from 'vuex';
-
-import InputFormPage from '@/components/presentationals/InputFormPage.vue'
+import getDirections from '@/services/directions.js';
+import requestToLaravel from '@/services/requestToLaravel.js';
+import requestToMap from '@/services/requestToMap.js';
+import InputFormPage from '@/components/presentationals/SearchFormPage.vue';
 
 export default {
   components: {
@@ -30,7 +33,10 @@ export default {
     },
     deleteDestination() {
       this.decrement();
-    }
+    },
+    searchDirections() {
+      getDirections();
+    },
   }
 } 
 </script>

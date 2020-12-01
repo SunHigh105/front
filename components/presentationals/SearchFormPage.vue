@@ -27,7 +27,11 @@
       <TimePulldown />
     </div>
     <div class="c-input-form__content">
-      <BaseBtn :label="'Search'"/>
+      <BaseBtn
+        :label="'Search'"
+        @search-directions="searchDirections"
+        :click-event="'search-directions'"
+      />
     </div>
   </div>
 </template>
@@ -54,6 +58,9 @@ export default {
     deleteDestination() {
       this.$emit('delete-destination');
     },
+    searchDirections() {
+      this.$emit('search-directions');
+    },
   }
-} 
+}
 </script>
