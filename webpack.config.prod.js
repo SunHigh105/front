@@ -11,7 +11,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: `${__dirname.replace('front', '')}/public`,
-    filename: 'app.js'
+    filename: 'js/app.js'
   },
   module: {
     rules: [

@@ -10,8 +10,6 @@
 import { mapState } from 'vuex';
 import { mapMutations } from 'vuex';
 import getDirections from '@/services/directions.js';
-import requestToLaravel from '@/services/requestToLaravel.js';
-import requestToMap from '@/services/requestToMap.js';
 import InputFormPage from '@/components/presentationals/SearchFormPage.vue';
 
 export default {
