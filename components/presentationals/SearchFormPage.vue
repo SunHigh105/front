@@ -1,9 +1,10 @@
 <template>
   <div class="c-input-form">
     <div v-for="n in count" :key="n.index" class="c-input-form__content">
-      <BaseTxtInput :label="'Destination'" />
+      <BaseTxtInput :label="'Destination'" :name="'destination'" />
       <BaseNumInput 
         :label="'Spent Time(min)'"
+        :name="'time'"
         :min="0"
         :max="3600"
         :step="10"

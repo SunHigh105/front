@@ -18,7 +18,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'count'
+      'count',
+      'routes'
     ]),
   },
   methods: {
@@ -33,7 +34,15 @@ export default {
       this.decrement();
     },
     searchDirections() {
-      getDirections();
+      const destinations = document.getElementsByName('destination');
+      const spentTimes = document.getElementsByName('time');
+      console.log(destinations);
+      Array.from(destinations)
+        .filter((d, i) => (i + 1) < destinations.length)
+        .map((d, i) => {
+          getDirections(d.value, destinations[i + 1].value);
+        });
+      console.log(this.routes);
     },
   }
 } 
