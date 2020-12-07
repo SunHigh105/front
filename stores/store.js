@@ -8,6 +8,7 @@ const store = new Vuex.Store({
   state: {
     count: 1,
     routes: [],
+    destinations: [],
   },
   mutations: {
     increment(state) {
@@ -19,6 +20,9 @@ const store = new Vuex.Store({
     },
     addRoute(state, payload) {
       state.routes.push(payload.route);
+    },
+    addDestination(state, payload) {
+      state.destinations.push(payload.destination);
     }
   }
 });

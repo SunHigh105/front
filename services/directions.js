@@ -1,7 +1,7 @@
 import axios from 'axios';
 import store from '../stores/store.js';
 
-const getDirections = async (origin = '東京駅', destination = '横浜駅') => {
+const getDirections = async (start = '東京駅', end = '横浜駅') => {
   const instance = axios.create({
     baseURL: BASE_URL,
     headers: {
@@ -12,17 +12,30 @@ const getDirections = async (origin = '東京駅', destination = '横浜駅') =>
 
   try {
     const res = await instance.post(`/api/route`, {
-      origin: encodeURI(origin),
-      destination: encodeURI(destination)
+      origin: encodeURI(start),
+      destination: encodeURI(end)
     });
 
     if (res.status === 200) {
-      const distance = res.data.routes[0].legs[0].distance.text;
-      const duration = res.data.routes[0].legs[0].duration.text;
+      const routeInfo = res.data.routes[0].legs[0];
       store.commit('addRoute', {
         route: {
-          distance: distance,
-          duration: duration
+          distance: routeInfo.distance.text,
+          duration: routeInfo.duration.text,
+        }
+      });
+      store.commit('addDestination', {
+        destination: {
+          start: {
+            name: start,
+            address: routeInfo.start_address,
+            location: routeInfo.start_location
+          },
+          end: {
+            name: end,
+            address: routeInfo.end_address,
+            location: routeInfo.end_location
+          },
         }
       });
     }
