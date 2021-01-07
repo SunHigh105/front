@@ -2,6 +2,7 @@
   <MappingPage
     :destinations="destinations"
     :routes="routes"
+    :markers="markers"
     :center="center"
     :zoom="zoom"
   />
@@ -20,21 +21,31 @@ export default {
     }
   },
   computed: {
-  ...mapState([
-    'routes',
-    'destinations',
-  ]),
-  center() {
-    return this.destinations[0] ? 
-      {
-        lat: this.destinations[0].location.lat, 
-        lng: this.destinations[0].location.lng,
-      } : 
-      {
-        lat :35.6585805, 
-        lng :139.7454329
-      }
-    }
+    ...mapState([
+      'routes',
+      'destinations',
+    ]),
+    center() {
+      return this.destinations[0] ? 
+        {
+          lat: this.destinations[0].location.lat, 
+          lng: this.destinations[0].location.lng,
+        } : 
+        {
+          lat :35.6585805, 
+          lng :139.7454329
+        }
+    },
+    markers() {
+      let markerList = [];
+      this.destinations.map(d => {
+        markerList.push({
+          position: d.location,
+          label: String(d.index),
+        });
+      });
+      return markerList;
+    },
   },
 }
 </script>

@@ -7,6 +7,15 @@
         :zoom="zoom"
         map-type-id="roadmap"
       >
+        <GmapMarker
+          :key="index"
+          v-for="(m, index) in markers"
+          :position="m.position"
+          :label="m.label"
+          :clickable="true"
+          :draggable="false"
+          @click="center=m.position"
+        />
       </GmapMap>
     </div>
     <div class="c-mapping__list">
@@ -27,6 +36,7 @@ export default {
   props: {
     destinations: { type: Array, default: () => [] },
     routes: { type: Array, default: () => [] },
+    markers: { type: Array, default: () => [] },
     center: { type: Object, requied: true },
     zoom: { type: Number, required: true },
   },
