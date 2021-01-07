@@ -1,7 +1,6 @@
 <template>
   <div class="c-mapping">
     <div class="c-mapping__mapview">
-      <!--<div id="map_view"></div>-->
       <GmapMap ref="myMap"
         :center="center"
         :zoom="zoom"
@@ -24,7 +23,7 @@
           <div>{{ destination.index }}. {{ destination.name }}</div>
           <div>{{ destination.address }}</div>
           <div v-if="routes[destination.index - 1]">
-            {{ routes[destination.index - 1].duration }} ({{ routes[destination.index - 1].distance }})
+            {{ routes[destination.index - 1].duration.text }} ({{ routes[destination.index - 1].distance.text }})
           </div>
         </li>
       </ul>
@@ -40,6 +39,10 @@ export default {
     center: { type: Object, requied: true },
     zoom: { type: Number, required: true },
   },
+  mounted() {
+    // console.log(this.destinations);
+    // console.log(this.routes);
+  }
   /*
   mounted(){
     const script = document.createElement('script');

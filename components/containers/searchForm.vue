@@ -26,7 +26,6 @@ export default {
   },
   mounted () {
     // 目的地入力中の場合は、目的地をテキストボックスに入れる
-    // console.log(this.destinations);
     if (this.destinations.length < 1) return;
     Array.from(document.getElementsByName('destination')).map((d, i) => {
       d.value = this.destinations[i].name;
@@ -55,7 +54,12 @@ export default {
       Array.from(destinations)
         .filter((d, i) => (i + 1) < destinations.length)
         .map((d, i) => {
-          getDirections(d.value, destinations[i + 1].value, i + 2 === destinations.length);
+          getDirections(
+            d.value,
+            destinations[i + 1].value,
+            Number(spentTimes[i + 1].value),
+            i + 2 === destinations.length
+          );
         });
      router.push('map');
     },
