@@ -1,7 +1,7 @@
 <template>
   <MainComponent
     :page-title="pageTitle"
-    :nav-links="navLinks"
+    :nav-links="navLinks.filter(n => n.path != '/map')"
   />
 </template>
 <script>
@@ -16,19 +16,27 @@ export default {
       pageTitle: 'Destination Setting',
       navLinks: [
         { path: '/', txt: 'Destination Setting' },
-        { path: '/destinations', txt: 'Map' },
+        { path: '/map', txt: 'Map' },
         { path: '/model_plans', txt: 'Model Plans' },
       ],
     }
   },
   watch: {
     $route() {
+      this.changePageTitle();
+    },
+  },
+  mounted() {
+    this.changePageTitle();
+  },
+  methods: {
+    changePageTitle() {
       this.navLinks
         .filter(link => link.path === this.$route.path)
         .map(link => {
           this.pageTitle = link.txt;
         });
-    },
+    }
   }
 }
 </script>

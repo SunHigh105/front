@@ -1,7 +1,10 @@
 <template>
   <div class="c-input-form">
     <div v-for="n in count" :key="n.index" class="c-input-form__content">
-      <BaseTxtInput :label="'Destination'" :name="'destination'" />
+      <BaseTxtInput
+        :label="'Destination'"
+        :name="'destination'"
+      />
       <BaseNumInput 
         :label="'Spent Time(min)'"
         :name="'time'"
@@ -51,6 +54,7 @@ export default {
   },
   props: {
     count: { type: Number, required: true },
+    inputs: { type: Array, default: () => []}
   },
   methods: {
     addDestination() {

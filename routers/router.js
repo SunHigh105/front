@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import InputForm from '@/components/containers/SearchForm.vue';
-import DestinationMapping from '@/components/containers/DestinationList.vue';
+import DestinationMapping from '@/components/containers/MappingContainer.vue';
 import ModelPlanList from '@/components/containers/ModelPlanList.vue';
 
 Vue.use(VueRouter)
@@ -10,7 +10,7 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     { path: '/', component: InputForm },
-    { path: '/destinations', component: DestinationMapping },
+    { path: '/map', component: DestinationMapping },
     { path: '/model_plans', component: ModelPlanList },
   ]
 });

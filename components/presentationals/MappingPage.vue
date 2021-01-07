@@ -11,9 +11,12 @@
     </div>
     <div class="c-mapping__list">
       <ul>
-        <li v-for="destination in destinationList" :key="destination.index">
-          <div>{{ destination.place }}</div>
-          <div>{{ destination.time }} {{ destination.distance }}</div>
+        <li v-for="destination in destinations" :key="destination.index">
+          <div>{{ destination.index }}. {{ destination.name }}</div>
+          <div>{{ destination.address }}</div>
+          <div v-if="routes[destination.index - 1]">
+            {{ routes[destination.index - 1].duration }} ({{ routes[destination.index - 1].distance }})
+          </div>
         </li>
       </ul>
     </div>
@@ -22,16 +25,10 @@
 <script>
 export default {
   props: {
-    destinationList: { type: Array, default: () => [] },
-  },
-  data() {
-    return {
-      center: {
-        lat:35.6585805, 
-        lng:139.7454329
-      },
-      zoom: 12,
-    }
+    destinations: { type: Array, default: () => [] },
+    routes: { type: Array, default: () => [] },
+    center: { type: Object, requied: true },
+    zoom: { type: Number, required: true },
   },
   /*
   mounted(){

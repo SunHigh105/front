@@ -21,8 +21,14 @@ const store = new Vuex.Store({
     addRoute(state, payload) {
       state.routes.push(payload.route);
     },
+    resetRoutes(state) {
+      state.routes = [];
+    },
     addDestination(state, payload) {
       state.destinations.push(payload.destination);
+    },
+    resetDestinations(state) {
+      state.destinations = [];
     }
   }
 });
