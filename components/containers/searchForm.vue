@@ -1,5 +1,5 @@
 <template>
-  <InputFormPage
+  <SearchForm
     :count="count"
     @add-destination="addDestination"
     @delete-destination="deleteDestination"
@@ -7,24 +7,20 @@
   />
 </template>
 <script>
-import { mapState } from 'vuex';
-import { mapMutations } from 'vuex';
-import router from '@/routers/router.js'
+import { mapState, mapMutations } from 'vuex';
+
+import router from '@/routers/router.js';
 import getDirections from '@/services/directions.js';
-import InputFormPage from '@/components/presentationals/SearchFormPage.vue';
+import SearchForm from '@/components/presentationals/SearchForm.vue';
 
 export default {
   components: {
-    InputFormPage,
+    SearchForm,
   },
   computed: {
-    ...mapState([
-      'count',
-      'routes',
-      'destinations',
-    ]),
+    ...mapState(['count', 'routes', 'destinations']),
   },
-  mounted () {
+  mounted() {
     // 目的地入力中の場合は、目的地をテキストボックスに入れる
     if (this.destinations.length < 1) return;
     Array.from(document.getElementsByName('destination')).map((d, i) => {
@@ -52,7 +48,7 @@ export default {
       this.resetDestinations();
       this.resetRoutes();
       Array.from(destinations)
-        .filter((d, i) => (i + 1) < destinations.length)
+        .filter((d, i) => i + 1 < destinations.length)
         .map((d, i) => {
           getDirections(
             d.value,
@@ -61,8 +57,8 @@ export default {
             i + 2 === destinations.length
           );
         });
-     router.push('map');
+      router.push('map');
     },
-  }
-} 
+  },
+};
 </script>

@@ -12,10 +12,10 @@ const store = new Vuex.Store({
   },
   mutations: {
     increment(state) {
-      state.count++
+      state.count++;
     },
     decrement(state) {
-      if(state.count === 0) return;
+      if (state.count === 0) return;
       state.count--;
     },
     addRoute(state, payload) {
@@ -29,8 +29,8 @@ const store = new Vuex.Store({
     },
     resetDestinations(state) {
       state.destinations = [];
-    }
-  }
+    },
+  },
 });
 
 export default store;

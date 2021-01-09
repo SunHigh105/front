@@ -1,11 +1,7 @@
 <template>
   <div class="c-mapping">
     <div class="c-mapping__mapview">
-      <GmapMap ref="myMap"
-        :center="center"
-        :zoom="zoom"
-        map-type-id="roadmap"
-      >
+      <GmapMap ref="myMap" :center="center" :zoom="zoom" map-type-id="roadmap">
         <GmapMarker
           :key="index"
           v-for="(m, index) in markers"
@@ -13,7 +9,7 @@
           :label="m.label"
           :clickable="true"
           :draggable="false"
-          @click="center=m.position"
+          @click="center"
         />
       </GmapMap>
     </div>
@@ -23,7 +19,9 @@
           <div>{{ destination.index }}. {{ destination.name }}</div>
           <div>{{ destination.address }}</div>
           <div v-if="routes[destination.index - 1]">
-            {{ routes[destination.index - 1].duration.text }} ({{ routes[destination.index - 1].distance.text }})
+            {{ routes[destination.index - 1].duration.text }} ({{
+              routes[destination.index - 1].distance.text
+            }})
           </div>
         </li>
       </ul>
@@ -42,7 +40,7 @@ export default {
   mounted() {
     // console.log(this.destinations);
     // console.log(this.routes);
-  }
+  },
   /*
   mounted(){
     const script = document.createElement('script');
@@ -61,5 +59,5 @@ export default {
     },
   }
   */
-}
+};
 </script>

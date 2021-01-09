@@ -1,16 +1,16 @@
 <template>
-  <ModelPlanListPage :model-plans="modelPlans" />
+  <ModelPlanList :model-plans="modelPlans" />
 </template>
 <script>
-import ModelPlanListPage from '@/components/presentationals/ModelPlanListPage.vue';
+import ModelPlanList from '@/components/presentationals/ModelPlanList.vue';
 export default {
   components: {
-    ModelPlanListPage,
+    ModelPlanList,
   },
   data() {
     return {
       modelPlans: [],
-    }
+    };
   },
   mounted() {
     [...Array(5)].map((_, i) => {
@@ -21,6 +21,6 @@ export default {
         created: '2020/11/17',
       });
     });
-  }
-}
+  },
+};
 </script>

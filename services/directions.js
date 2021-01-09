@@ -1,9 +1,13 @@
 import axios from 'axios';
 import store from '../stores/store.js';
 
-const getDirections = async (start = '東京駅', end = '横浜駅', spentTime = 0, isLast = false) => {
+const getDirections = async (
+  start = '東京駅',
+  end = '横浜駅',
+  spentTime = 0,
+  isLast = false
+) => {
   const instance = axios.create({
-    baseURL: BASE_URL,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -11,18 +15,24 @@ const getDirections = async (start = '東京駅', end = '横浜駅', spentTime =
   });
 
   try {
-    const res = await instance.post(`/api/route`, {
+    const res = await instance.post('/api/route', {
       origin: encodeURI(start),
-      destination: encodeURI(end)
+      destination: encodeURI(end),
     });
 
     if (res.status === 200) {
       const routeInfo = res.data.routes[0].legs[0];
       store.commit('addRoute', {
         route: {
-          distance: { text: routeInfo.distance.text, value: routeInfo.distance.value },
-          duration: { text: routeInfo.duration.text, value: routeInfo.duration.value },
-        }
+          distance: {
+            text: routeInfo.distance.text,
+            value: routeInfo.distance.value,
+          },
+          duration: {
+            text: routeInfo.duration.text,
+            value: routeInfo.duration.value,
+          },
+        },
       });
       store.commit('addDestination', {
         destination: {
@@ -31,7 +41,7 @@ const getDirections = async (start = '東京駅', end = '横浜駅', spentTime =
           address: routeInfo.start_address,
           location: routeInfo.start_location,
           spent_time: spentTime,
-        }
+        },
       });
       if (isLast) {
         store.commit('addDestination', {
@@ -41,7 +51,7 @@ const getDirections = async (start = '東京駅', end = '横浜駅', spentTime =
             address: routeInfo.end_address,
             location: routeInfo.end_location,
             spent_time: spentTime,
-          }
+          },
         });
       }
     }

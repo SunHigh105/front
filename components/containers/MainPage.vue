@@ -1,17 +1,17 @@
 <template>
-  <MainComponent
+  <MainPage
     :page-title="pageTitle"
     :nav-links="navLinks.filter(n => n.path != '/map')"
   />
 </template>
 <script>
-import MainComponent from '@/components/presentationals/MainComponent.vue';
+import MainPage from '@/components/presentationals/MainPage.vue';
 
 export default {
   components: {
-    MainComponent,
+    MainPage,
   },
-  data(){
+  data() {
     return {
       pageTitle: 'Destination Setting',
       navLinks: [
@@ -19,7 +19,7 @@ export default {
         { path: '/map', txt: 'Map' },
         { path: '/model_plans', txt: 'Model Plans' },
       ],
-    }
+    };
   },
   watch: {
     $route() {
@@ -36,7 +36,7 @@ export default {
         .map(link => {
           this.pageTitle = link.txt;
         });
-    }
-  }
-}
+    },
+  },
+};
 </script>

@@ -16,8 +16,7 @@ export default {
     return {
       hour: [...Array(24)].map((_, i) => i),
       time: [...Array(6)].map((_, i) => i * 10),
-    }
+    };
   },
-}
-
+};
 </script>

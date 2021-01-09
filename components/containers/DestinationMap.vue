@@ -1,5 +1,5 @@
 <template>
-  <MappingPage
+  <DestinationMap
     :destinations="destinations"
     :routes="routes"
     :markers="markers"
@@ -9,35 +9,32 @@
 </template>
 <script>
 import { mapState } from 'vuex';
-import MappingPage from '@/components/presentationals/MappingPage.vue';
+import DestinationMap from '@/components/presentationals/DestinationMap.vue';
 
 export default {
   components: {
-    MappingPage,
+    DestinationMap,
   },
   data() {
-    return{
-      zoom: 12
-    }
+    return {
+      zoom: 12,
+    };
   },
   computed: {
-    ...mapState([
-      'routes',
-      'destinations',
-    ]),
+    ...mapState(['routes', 'destinations']),
     center() {
-      return this.destinations[0] ? 
-        {
-          lat: this.destinations[0].location.lat, 
-          lng: this.destinations[0].location.lng,
-        } : 
-        {
-          lat :35.6585805, 
-          lng :139.7454329
-        }
+      return this.destinations[0]
+        ? {
+            lat: this.destinations[0].location.lat,
+            lng: this.destinations[0].location.lng,
+          }
+        : {
+            lat: 35.6585805,
+            lng: 139.7454329,
+          };
     },
     markers() {
-      let markerList = [];
+      const markerList = [];
       this.destinations.map(d => {
         markerList.push({
           position: d.location,
@@ -47,5 +44,5 @@ export default {
       return markerList;
     },
   },
-}
+};
 </script>

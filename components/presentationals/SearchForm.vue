@@ -1,11 +1,8 @@
 <template>
   <div class="c-input-form">
     <div v-for="n in count" :key="n.index" class="c-input-form__content">
-      <BaseTxtInput
-        :label="'Destination'"
-        :name="'destination'"
-      />
-      <BaseNumInput 
+      <BaseTxtInput :label="'Destination'" :name="'destination'" />
+      <BaseNumInput
         :label="'Spent Time(min)'"
         :name="'time'"
         :min="0"
@@ -13,7 +10,7 @@
         :step="10"
       />
       <span v-if="n != 1 && n === count">
-        <BaseBtn 
+        <BaseBtn
           :label="'Delete'"
           @delete-destination="deleteDestination"
           :click-event="'delete-destination'"
@@ -54,7 +51,7 @@ export default {
   },
   props: {
     count: { type: Number, required: true },
-    inputs: { type: Array, default: () => []}
+    inputs: { type: Array, default: () => [] },
   },
   methods: {
     addDestination() {
@@ -66,6 +63,6 @@ export default {
     searchDirections() {
       this.$emit('search-directions');
     },
-  }
-}
+  },
+};
 </script>

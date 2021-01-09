@@ -6,10 +6,7 @@
     <nav class="l-navigation">
       <ul>
         <li v-for="link in navLinks" :key="link.path">
-          <router-link
-            :to="link.path"
-          >{{ link.txt }}
-          </router-link>
+          <router-link :to="link.path">{{ link.txt }} </router-link>
         </li>
       </ul>
     </nav>
@@ -28,5 +25,5 @@ export default {
     pageTitle: { type: String, required: true },
     navLinks: { type: Array, required: true },
   },
-}
+};
 </script>

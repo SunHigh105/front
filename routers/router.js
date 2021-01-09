@@ -1,18 +1,18 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import InputForm from '@/components/containers/SearchForm.vue';
-import DestinationMapping from '@/components/containers/MappingContainer.vue';
+import SearchForm from '@/components/containers/SearchForm.vue';
+import DestinationMap from '@/components/containers/DestinationMap.vue';
 import ModelPlanList from '@/components/containers/ModelPlanList.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/', component: InputForm },
-    { path: '/map', component: DestinationMapping },
+    { path: '/', component: SearchForm },
+    { path: '/map', component: DestinationMap },
     { path: '/model_plans', component: ModelPlanList },
-  ]
+  ],
 });
 
 export default router;
