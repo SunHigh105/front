@@ -9,6 +9,11 @@ const store = new Vuex.Store({
     count: 1,
     routes: [],
     destinations: [],
+    spentTimes: [],
+    departureTime: {
+      hour: 0,
+      minute: 0,
+    },
   },
   mutations: {
     increment(state) {
@@ -18,17 +23,24 @@ const store = new Vuex.Store({
       if (state.count === 0) return;
       state.count--;
     },
+    addSpentTime(state, payload) {
+      state.spentTimes.push(payload.spentTime);
+    },
+    setDepartureTime(state, payload) {
+      state.departureTime.hour = payload.hour;
+      state.departureTime.minute = payload.minute;
+    },
     addRoute(state, payload) {
       state.routes.push(payload.route);
-    },
-    resetRoutes(state) {
-      state.routes = [];
     },
     addDestination(state, payload) {
       state.destinations.push(payload.destination);
     },
-    resetDestinations(state) {
-      state.destinations = [];
+    resetState(state) {
+      state.destination = [];
+      state.routes = [];
+      state.spentTimes = [];
+      state.departureTime = { hour: 0, time: 0 };
     },
   },
 });

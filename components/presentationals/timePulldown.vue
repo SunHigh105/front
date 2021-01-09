@@ -1,11 +1,11 @@
 <template>
   <div>
-    <label>Depature time</label>
-    <select>
+    <label>Departure time</label>
+    <select name="departure">
       <option v-for="h in hour" :key="h.index" :value="h">{{ h }}</option>
     </select>
     :
-    <select>
+    <select name="departure">
       <option v-for="t in time" :key="t.index" :value="t">{{ t }}</option>
     </select>
   </div>

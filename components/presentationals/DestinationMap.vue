@@ -32,13 +32,15 @@
 export default {
   props: {
     destinations: { type: Array, default: () => [] },
+    spentTimes: { type: Array, default: () => [] },
     routes: { type: Array, default: () => [] },
     markers: { type: Array, default: () => [] },
     center: { type: Object, requied: true },
     zoom: { type: Number, required: true },
   },
   mounted() {
-    // console.log(this.destinations);
+    console.log(this.destinations);
+    console.log(this.spentTimes);
     // console.log(this.routes);
   },
   /*

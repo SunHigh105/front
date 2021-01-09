@@ -4,7 +4,6 @@ import store from '../stores/store.js';
 const getDirections = async (
   start = '東京駅',
   end = '横浜駅',
-  spentTime = 0,
   isLast = false
 ) => {
   const instance = axios.create({
@@ -40,7 +39,6 @@ const getDirections = async (
           name: start,
           address: routeInfo.start_address,
           location: routeInfo.start_location,
-          spent_time: spentTime,
         },
       });
       if (isLast) {
@@ -50,7 +48,6 @@ const getDirections = async (
             name: end,
             address: routeInfo.end_address,
             location: routeInfo.end_location,
-            spent_time: spentTime,
           },
         });
       }

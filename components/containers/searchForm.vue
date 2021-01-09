@@ -18,7 +18,7 @@ export default {
     SearchForm,
   },
   computed: {
-    ...mapState(['count', 'routes', 'destinations']),
+    ...mapState(['count', 'routes', 'destinations', 'spentTimes', 'departureTime']),
   },
   mounted() {
     // 目的地入力中の場合は、目的地をテキストボックスに入れる
@@ -26,13 +26,20 @@ export default {
     Array.from(document.getElementsByName('destination')).map((d, i) => {
       d.value = this.destinations[i].name;
     });
+    Array.from(document.getElementsByName('time')).map((t, i) => {
+      t.value = this.spentTimes[i];
+    });
+    const departureTime = document.getElementsByName('departure');
+    departureTime[0].value = this.departureTime.hour;
+    departureTime[1].value = this.departureTime.minute;
   },
   methods: {
     ...mapMutations([
       'increment',
       'decrement',
-      'resetDestinations',
-      'resetRoutes',
+      'addSpentTime',
+      'setDepartureTime',
+      'resetState',
     ]),
     addDestination() {
       this.increment();
@@ -44,19 +51,33 @@ export default {
       // todo: 空欄の時はバリデーション
       const destinations = document.getElementsByName('destination');
       const spentTimes = document.getElementsByName('time');
-      // 登録前に目的地とルートをリセット
-      this.resetDestinations();
-      this.resetRoutes();
+      const departureTime = document.getElementsByName('departure');
+
+      // 登録前に目的地・ルート・出発時刻をリセット
+      this.resetState();
+
+      // 出発時刻をStoreに登録
+      this.setDepartureTime({
+        hour: Number(departureTime[0].value),
+        minute: Number(departureTime[1].value),
+      });
+
+      // 各地点の滞在時間をStoreに登録
+      Array.from(spentTimes).map(time => {
+        this.addSpentTime({ spentTime: Number(time.value) });
+      });
+
+      // ルート検索・目的地をStoreに登録
       Array.from(destinations)
         .filter((d, i) => i + 1 < destinations.length)
         .map((d, i) => {
           getDirections(
             d.value,
             destinations[i + 1].value,
-            Number(spentTimes[i + 1].value),
             i + 2 === destinations.length
           );
         });
+
       router.push('map');
     },
   },
