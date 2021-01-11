@@ -2,12 +2,13 @@ const loader = require('sass-loader');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
-const MODE = "development";
+const MODE = "production";
 const enabledSourceMap = MODE === "development";
 
 require('dotenv').config();
 
 module.exports = {
+  mode: MODE,
   entry: './src/index.js',
   output: {
     path: `${__dirname.replace('front', '')}/public`,

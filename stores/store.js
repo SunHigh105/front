@@ -37,7 +37,7 @@ const store = new Vuex.Store({
       state.destinations.push(payload.destination);
     },
     resetState(state) {
-      state.destination = [];
+      state.destinations = [];
       state.routes = [];
       state.spentTimes = [];
       state.departureTime = { hour: 0, time: 0 };

@@ -18,6 +18,10 @@
         <li v-for="destination in destinations" :key="destination.index">
           <div>{{ destination.index }}. {{ destination.name }}</div>
           <div>{{ destination.address }}</div>
+          <div>
+            {{ spentTimeList[destination.index - 1].from }} ~
+            {{ spentTimeList[destination.index - 1].to }}
+          </div>
           <div v-if="routes[destination.index - 1]">
             {{ routes[destination.index - 1].duration.text }} ({{
               routes[destination.index - 1].distance.text
@@ -32,15 +36,15 @@
 export default {
   props: {
     destinations: { type: Array, default: () => [] },
-    spentTimes: { type: Array, default: () => [] },
+    spentTimeList: { type: Array, default: () => [] },
     routes: { type: Array, default: () => [] },
     markers: { type: Array, default: () => [] },
     center: { type: Object, requied: true },
     zoom: { type: Number, required: true },
   },
   mounted() {
-    console.log(this.destinations);
-    console.log(this.spentTimes);
+    // console.log(this.destinations);
+    console.log(this.spentTimeList);
     // console.log(this.routes);
   },
   /*

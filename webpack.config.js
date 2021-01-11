@@ -8,10 +8,11 @@ const enabledSourceMap = MODE === "development";
 require('dotenv').config();
 
 module.exports = {
+  mode: MODE,
   entry: './src/index.js',
   output: {
-    path: `${__dirname}/dist`,
-    filename: 'main.js'
+    path: `${__dirname.replace('front', '')}/public`,
+    filename: 'js/app.js'
   },
   module: {
     rules: [

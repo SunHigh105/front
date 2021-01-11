@@ -2,18 +2,18 @@
   <div>
     <DestinationMap
       :destinations="destinations"
-      :spent-times="spentTimes"
+      :spent-time-list="spentTimeList"
       :routes="routes"
       :markers="markers"
       :center="center"
       :zoom="zoom"
     />
-    <div>{{ startTime }}</div>
   </div>
 </template>
 <script>
 import { mapState } from 'vuex';
 import DestinationMap from '@/components/presentationals/DestinationMap.vue';
+import { calcTime, formatTime } from '@/utils/time.js';
 
 export default {
   components: {
@@ -25,7 +25,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['routes', 'destinations', 'spentTimes', 'departureTime']),
+    ...mapState(['destinations', 'routes', 'spentTimes', 'departureTime']),
     center() {
       return this.destinations[0]
         ? {
@@ -47,20 +47,24 @@ export default {
       });
       return markerList;
     },
-    // todo: 滞在時刻を算出
-  },
-  methods: {
-    calcTime(hour, minute, spentTime) {
-      let h = hour;
-      let m = minute + spentTime;
-      if (m >= 60) {
-        h = h + Math.floor(m / 60);
-        m = m % 60;
-      }
-      if (h >= 24) {
-        h = h - 24;
-      }
-      return `${String(h).padStart(2, '0')} : ${String(m).padStart(2, '0')}`;
+    spentTimeList() {
+      const list = [];
+      let fromTime = this.departureTime;
+
+      this.spentTimes.map((t, i) => {
+        const toTime = calcTime(fromTime.hour, fromTime.minute, t);
+        list.push({
+          from: formatTime(fromTime.hour, fromTime.minute),
+          to: formatTime(toTime.hour, toTime.minute),
+        });
+        if (i + 1 < this.spentTimes.length) {
+          // todo: jsエラーが出るので解消したい
+          const interval = Math.floor(this.routes[i].duration.value / 60);
+          fromTime = calcTime(toTime.hour, toTime.minute, interval);
+        }
+      });
+
+      return list;
     },
   },
 };

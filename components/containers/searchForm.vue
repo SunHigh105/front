@@ -8,7 +8,6 @@
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex';
-
 import router from '@/routers/router.js';
 import getDirections from '@/services/directions.js';
 import SearchForm from '@/components/presentationals/SearchForm.vue';
@@ -18,7 +17,13 @@ export default {
     SearchForm,
   },
   computed: {
-    ...mapState(['count', 'routes', 'destinations', 'spentTimes', 'departureTime']),
+    ...mapState([
+      'count',
+      'routes',
+      'destinations',
+      'spentTimes',
+      'departureTime',
+    ]),
   },
   mounted() {
     // 目的地入力中の場合は、目的地をテキストボックスに入れる
@@ -56,17 +61,6 @@ export default {
       // 登録前に目的地・ルート・出発時刻をリセット
       this.resetState();
 
-      // 出発時刻をStoreに登録
-      this.setDepartureTime({
-        hour: Number(departureTime[0].value),
-        minute: Number(departureTime[1].value),
-      });
-
-      // 各地点の滞在時間をStoreに登録
-      Array.from(spentTimes).map(time => {
-        this.addSpentTime({ spentTime: Number(time.value) });
-      });
-
       // ルート検索・目的地をStoreに登録
       Array.from(destinations)
         .filter((d, i) => i + 1 < destinations.length)
@@ -77,6 +71,17 @@ export default {
             i + 2 === destinations.length
           );
         });
+
+      // 出発時刻をStoreに登録
+      this.setDepartureTime({
+        hour: Number(departureTime[0].value),
+        minute: Number(departureTime[1].value),
+      });
+
+      // 各地点の滞在時間をStoreに登録
+      Array.from(spentTimes).map(time => {
+        this.addSpentTime({ spentTime: Number(time.value) });
+      });
 
       router.push('map');
     },
