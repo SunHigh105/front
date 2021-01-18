@@ -7,6 +7,8 @@
       :markers="markers"
       :center="center"
       :zoom="zoom"
+      :handle-regist="'regist'"
+      @regist="regist"
     />
   </div>
 </template>
@@ -14,6 +16,7 @@
 import { mapState } from 'vuex';
 import DestinationMap from '@/components/presentationals/DestinationMap.vue';
 import { calcTime, formatTime } from '@/utils/time.js';
+import { registPlan } from '@/services/plans.js';
 
 export default {
   components: {
@@ -65,6 +68,23 @@ export default {
       });
 
       return list;
+    },
+  },
+  methods: {
+    regist() {
+      const places = [];
+      this.destinations.map((d, i) => {
+        places.push({
+          index: d.index,
+          place: d.name,
+          time: this.spentTimes[i],
+        });
+      });
+      registPlan({
+        plan_title: 'Plan test',
+        hour: this.departureTime.hour,
+        minute: this.departureTime.minute,
+      }, places);
     },
   },
 };

@@ -30,10 +30,16 @@
         </li>
       </ul>
     </div>
+    <BaseBtn :label="'Regist'" :click-event="'regist'" @regist="regist" />
   </div>
 </template>
 <script>
+import BaseBtn from '@/components/presentationals/bases/BaseBtn.vue';
+
 export default {
+  components: {
+    BaseBtn,
+  },
   props: {
     destinations: { type: Array, default: () => [] },
     spentTimeList: { type: Array, default: () => [] },
@@ -41,11 +47,17 @@ export default {
     markers: { type: Array, default: () => [] },
     center: { type: Object, requied: true },
     zoom: { type: Number, required: true },
+    handleRegist: { type: String, required: true },
   },
   mounted() {
     // console.log(this.destinations);
     console.log(this.spentTimeList);
     // console.log(this.routes);
+  },
+  methods: {
+    regist() {
+      this.$emit(this.handleRegist);
+    },
   },
   /*
   mounted(){
