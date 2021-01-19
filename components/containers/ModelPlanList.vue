@@ -3,24 +3,21 @@
 </template>
 <script>
 import ModelPlanList from '@/components/presentationals/ModelPlanList.vue';
+import { getPlans } from '@/services/plans.js';
+import { mapState } from 'vuex';
+
 export default {
   components: {
     ModelPlanList,
   },
-  data() {
-    return {
-      modelPlans: [],
-    };
+  computed: {
+    ...mapState(['plans']),
+    modelPlans() {
+      return this.plans;
+    },
   },
   mounted() {
-    [...Array(5)].map((_, i) => {
-      this.modelPlans.push({
-        index: i + 1,
-        title: `Model Plan ${i + 1}`,
-        author: 'hogehoge',
-        created: '2020/11/17',
-      });
-    });
+    getPlans();
   },
 };
 </script>

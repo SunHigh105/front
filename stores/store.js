@@ -14,6 +14,7 @@ const store = new Vuex.Store({
       hour: 0,
       minute: 0,
     },
+    plans: [],
   },
   mutations: {
     increment(state) {
@@ -35,6 +36,12 @@ const store = new Vuex.Store({
     },
     addDestination(state, payload) {
       state.destinations.push(payload.destination);
+    },
+    getPlans(state, payload) {
+      state.plans = payload.plans;
+    },
+    resetPlans(state) {
+      state.plans = [];
     },
     resetState(state) {
       state.destinations = [];
