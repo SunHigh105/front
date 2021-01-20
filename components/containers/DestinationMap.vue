@@ -80,11 +80,14 @@ export default {
           time: this.spentTimes[i],
         });
       });
-      registPlan({
-        plan_title: 'Plan test',
-        hour: this.departureTime.hour,
-        minute: this.departureTime.minute,
-      }, places);
+      registPlan(
+        {
+          plan_title: 'Plan test',
+          hour: this.departureTime.hour,
+          minute: this.departureTime.minute,
+        },
+        places
+      );
     },
   },
 };

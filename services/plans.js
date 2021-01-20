@@ -1,5 +1,6 @@
 import createAxiosInstance from '../services/createAxiosInstance.js';
 import store from '../stores/store.js';
+import getDirections from './directions.js';
 
 /**
  * プランをDBに登録
@@ -39,17 +40,31 @@ const getPlans = async () => {
   }
 };
 
-// const getPlaces = async id => {
-//   const instance = createAxiosInstance();
-//   try {
-//     const res = await instance.post('/api/getPlaces', id);
-//     if (res.status === 200) {
-//       return res.data;
-//     }
-//   } catch (e) {
-//     console.log(e);
-//     alert('Get Places Failed');
-//   }
-// }
+const getPlaces = async id => {
+  const instance = createAxiosInstance();
+  try {
+    const res = await instance.post('/api/getPlaces', { plan_id: id });
+    if (res.status === 200) {
+      const destinations = res.data;
+      // ルートと目的地をStoreに登録
+      destinations
+        .filter((d, i) => i + 1 < destinations.length)
+        .map((d, i) => {
+          getDirections(
+            d.place,
+            destinations[i + 1].place,
+            i + 2 === destinations.length
+          );
+        });
+      // 各地点の滞在時間をStoreに登録
+      destinations.map(d => {
+        store.commit('addSpentTime', { spentTime: d.time });
+      });
+    }
+  } catch (e) {
+    console.log(e);
+    alert('Get Places Failed');
+  }
+};
 
-export { registPlan, getPlans };
+export { registPlan, getPlans, getPlaces };
