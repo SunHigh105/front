@@ -72,6 +72,11 @@ export default {
   },
   methods: {
     regist() {
+      // Plan Title Validation
+      if (document.getElementsByName('plan_title')[0].value === '') {
+        alert('Please Input Plan Title');
+        return false;
+      }
       const places = [];
       this.destinations.map((d, i) => {
         places.push({

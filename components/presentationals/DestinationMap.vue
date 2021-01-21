@@ -30,15 +30,20 @@
         </li>
       </ul>
     </div>
-    <BaseBtn :label="'Regist'" :click-event="'regist'" @regist="regist" />
+    <div class="c-mapping__submit">
+      <BaseTxtInput :label="'Plan Title'" :name="'plan_title'" />
+      <BaseBtn :label="'Regist'" :click-event="'regist'" @regist="regist" />
+    </div>
   </div>
 </template>
 <script>
 import BaseBtn from '@/components/presentationals/bases/BaseBtn.vue';
+import BaseTxtInput from '@/components/presentationals/bases/BaseTxtInput.vue';
 
 export default {
   components: {
     BaseBtn,
+    BaseTxtInput,
   },
   props: {
     destinations: { type: Array, default: () => [] },

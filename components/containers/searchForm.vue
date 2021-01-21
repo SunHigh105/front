@@ -58,32 +58,44 @@ export default {
       const spentTimes = document.getElementsByName('time');
       const departureTime = document.getElementsByName('departure');
 
-      // 登録前に目的地・ルート・出発時刻をリセット
-      this.resetState();
-
-      // ルート検索・目的地をStoreに登録
-      Array.from(destinations)
-        .filter((d, i) => i + 1 < destinations.length)
-        .map((d, i) => {
-          getDirections(
-            d.value,
-            destinations[i + 1].value,
-            i + 2 === destinations.length
-          );
+      try {
+        // 入力フォームバリデーション
+        Array.from(destinations).map(d => {
+          if (d.value === '') {
+            throw 'Please Input Destination';
+          }
         });
 
-      // 出発時刻をStoreに登録
-      this.setDepartureTime({
-        hour: Number(departureTime[0].value),
-        minute: Number(departureTime[1].value),
-      });
+        // 登録前に目的地・ルート・出発時刻をリセット
+        this.resetState();
 
-      // 各地点の滞在時間をStoreに登録
-      Array.from(spentTimes).map(time => {
-        this.addSpentTime({ spentTime: Number(time.value) });
-      });
+        // ルート検索・目的地をStoreに登録
+        Array.from(destinations)
+          .filter((d, i) => i + 1 < destinations.length)
+          .map((d, i) => {
+            getDirections(
+              d.value,
+              destinations[i + 1].value,
+              i + 2 === destinations.length
+            );
+          });
 
-      router.push('map');
+        // 出発時刻をStoreに登録
+        this.setDepartureTime({
+          hour: Number(departureTime[0].value),
+          minute: Number(departureTime[1].value),
+        });
+
+        // 各地点の滞在時間をStoreに登録
+        Array.from(spentTimes).map(time => {
+          this.addSpentTime({ spentTime: Number(time.value) });
+        });
+
+        router.push('map');
+      }
+      catch(e) {
+        alert('Please Input Destination');
+      }
     },
   },
 };
