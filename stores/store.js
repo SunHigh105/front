@@ -44,12 +44,14 @@ const store = new Vuex.Store({
       state.plans = [];
     },
     resetState(state) {
-      state.count = 0;
       state.destinations = [];
       state.routes = [];
       state.spentTimes = [];
       state.departureTime = { hour: 0, time: 0 };
     },
+    resetCount(state) {
+      state.count = 0;
+    }
   },
 });
 

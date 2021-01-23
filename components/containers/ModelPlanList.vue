@@ -18,7 +18,6 @@ export default {
   computed: {
     ...mapState(['plans']),
     modelPlans() {
-      console.log(this.plans);
       return this.plans;
     },
   },
@@ -26,10 +25,11 @@ export default {
     getPlans();
   },
   methods: {
-    ...mapMutations(['resetState', 'setDepartureTime']),
+    ...mapMutations(['resetState', 'resetCount', 'setDepartureTime']),
     getPlaces(id) {
       // 登録前に目的地・ルート・出発時刻をリセット
       this.resetState();
+      this.resetCount();
       // 出発時刻をStoreに登録
       const targetPlan = this.plans.filter(plan => plan.id === id)[0];
       this.setDepartureTime({

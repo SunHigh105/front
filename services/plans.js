@@ -16,7 +16,6 @@ const registPlan = async (plan, places) => {
       alert('Regist Plan Success!');
     }
   } catch (e) {
-    console.log(e);
     alert('Regist Plan Failed');
   }
 };
@@ -35,7 +34,6 @@ const getPlans = async () => {
       });
     }
   } catch (e) {
-    console.log(e);
     alert('Get Plans Failed');
   }
 };
@@ -63,7 +61,6 @@ const getPlaces = async id => {
       });
     }
   } catch (e) {
-    console.log(e);
     alert('Get Places Failed');
   }
 };
