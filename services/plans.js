@@ -56,8 +56,9 @@ const getPlaces = async id => {
             i + 2 === destinations.length
           );
         });
-      // 各地点の滞在時間をStoreに登録
+      // 各地点の滞在時間をStoreに登録`・countを増やす
       destinations.map(d => {
+        store.commit('increment');
         store.commit('addSpentTime', { spentTime: d.time });
       });
     }

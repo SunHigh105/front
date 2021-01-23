@@ -17,6 +17,7 @@ import { mapState } from 'vuex';
 import DestinationMap from '@/components/presentationals/DestinationMap.vue';
 import { calcTime, formatTime } from '@/utils/time.js';
 import { registPlan } from '@/services/plans.js';
+import router from '@/routers/router.js';
 
 export default {
   components: {
@@ -73,7 +74,8 @@ export default {
   methods: {
     regist() {
       // Plan Title Validation
-      if (document.getElementsByName('plan_title')[0].value === '') {
+      const planTitle = document.getElementsByName('plan_title')[0].value;
+      if (planTitle === '') {
         alert('Please Input Plan Title');
         return false;
       }
@@ -87,12 +89,13 @@ export default {
       });
       registPlan(
         {
-          plan_title: 'Plan test',
+          plan_title: planTitle,
           hour: this.departureTime.hour,
           minute: this.departureTime.minute,
         },
         places
       );
+      router.push('model_plans');
     },
   },
 };
