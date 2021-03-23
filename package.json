@@ -9,13 +9,15 @@
     "build": "webpack --config webpack.config.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint --ext .js,.vue ./*",
-    "format": "npx eslint --fix --ext .js,.vue ./*"
+    "format": "npx eslint --fix --ext .js,.vue ./*",
+    "cypress": "npx cypress open"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "axios": "^0.21.0",
     "css-loader": "^5.0.1",
+    "cypress": "^6.8.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
