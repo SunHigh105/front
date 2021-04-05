@@ -6,7 +6,6 @@
       }}</a>
       <div>{{ plan.created_at }}</div>
     </li>
-    <li class="c-model-plans__fish-img"></li>
   </ul>
 </template>
 <script>

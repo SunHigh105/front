@@ -5,8 +5,8 @@ export default {
   component: ModelPlanList,
 }
 
-const Template = args => ({
-  props: args,
+const Template = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
   components: { ModelPlanList },
   template: '<model-plan-list v-bind="$props" />',
 });
